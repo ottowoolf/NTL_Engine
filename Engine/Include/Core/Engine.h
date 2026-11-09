@@ -1,6 +1,7 @@
 #pragma once
-
 #include <SFML/Graphics.hpp>
+
+#include "Core/EngineVisitor.h"
 
 class Engine
 {
@@ -15,4 +16,9 @@ public:
     void processEvents();
     void update();
     void render();
+
+private:
+    friend EngineVisitor;
+
+    void EventWindowClosed();
 };

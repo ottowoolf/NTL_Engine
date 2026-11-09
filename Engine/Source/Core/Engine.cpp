@@ -17,8 +17,7 @@ void Engine::processEvents()
 {
     while (const auto event = window_.pollEvent())
     {
-        if (event->is<sf::Event::Closed>())
-            window_.close();
+        event->visit(EngineVisitor{*this});
     }
 }
 
@@ -34,4 +33,9 @@ void Engine::render()
     // Render game objects here
 
     window_.display();
+}
+
+void Engine::EventWindowClosed()
+{
+    window_.close();
 }
