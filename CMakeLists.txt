@@ -1,5 +1,15 @@
 #[[------------------------------------------------------------------------------
-    This CMakeLists.txt file is used to configure the build process for a C++ project that uses the SFML (Simple and Fast Multimedia Library) library. It specifies the minimum required version of CMake, sets the project name and version, defines the C++ standard to be used, and includes the necessary source files for building the project.
+// Project : NTLEngine
+------------------------------------------------------------------------------
+// Author  : Otman Ouali with the Guidance of Adel Hales
+------------------------------------------------------------------------------
+// Development Start Date    : 09/11/2026
+------------------------------------------------------------------------------
+// Engine Description : NTLEngine is a C++ game engine that utilizes the SFML library for graphics and audio functionalities. It provides a framework for developing 2D games with ease. The engine is a passion and learning project designed to be modular, allowing developers to extend its capabilities as needed.
+------------------------------------------------------------------------------]]
+
+#[[------------------------------------------------------------------------------
+    This CMakeLists.txt file is used to configure the build process for a C++ project that uses the SFML library.
 ------------------------------------------------------------------------------]]
 
 
