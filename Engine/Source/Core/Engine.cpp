@@ -1,0 +1,37 @@
+
+#include "Core/Engine.h"
+
+Engine::Engine()
+    : window_(sf::VideoMode({800, 800}), "NTL Engine")
+{
+    window_.setIcon(sf::Image("Content/Textures/Logos/EnginIcon.png"));
+    window_.setMinimumSize(window_.getSize() / 2u);
+}
+
+bool Engine::IsRunning() const
+{
+    return window_.isOpen();
+}
+
+void Engine::processEvents()
+{
+    while (const auto event = window_.pollEvent())
+    {
+        if (event->is<sf::Event::Closed>())
+            window_.close();
+    }
+}
+
+void Engine::update()
+{
+    // Update game logic here
+}
+
+void Engine::render()
+{
+    window_.clear(sf::Color(243, 240, 255)); // Clear the window with a light purple color
+
+    // Render game objects here
+
+    window_.display();
+}

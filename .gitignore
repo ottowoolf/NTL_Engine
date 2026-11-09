@@ -1,0 +1,92 @@
+# ==========================================
+# Prerequisites & Core Compiler Artifacts
+# ==========================================
+*.d
+*.slo
+*.lo
+*.o
+*.obj
+*.gch
+*.pch
+
+# Debugger and Linker Files
+*.ilk
+*.pdb
+*.dwo
+*.suo
+*.idb
+
+# ==========================================
+# Static and Dynamic Libraries
+# ==========================================
+*.so
+*.so.*
+*.dylib
+*.dll
+*.la
+*.lai
+*.a
+*.lib
+
+# ==========================================
+# Executables
+# ==========================================
+*.exe
+*.out
+*.app
+
+# ==========================================
+# Build Systems (CMake, Make, etc.)
+# ==========================================
+# Ignore the entire build directory (adjust name if yours is different, e.g., /Bin/)
+[Bb]uild/
+[Bb]in/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+install_manifest.txt
+Makefile
+compile_commands.json
+
+# ==========================================
+# Package Managers
+# ==========================================
+vcpkg_installed/
+.cache/
+.conan/
+
+# ==========================================
+# IDEs and Text Editors
+# ==========================================
+# VS Code
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+
+# Visual Studio
+.vs/
+*.sln
+*.vcxproj
+*.vcxproj.user
+*.vcxproj.filters
+
+# CLion / IntelliJ
+.idea/
+
+# Xcode
+*.xcodeproj/
+*.xcworkspace/
+
+# Temporary / Backup Files
+*.tmp
+*.log
+*.bak
+*~
+[._]*.swp
+
+# ==========================================
+# Operating System Files
+# ==========================================
+.DS_Store
+Thumbs.db
