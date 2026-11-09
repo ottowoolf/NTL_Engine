@@ -33,16 +33,17 @@ set(SFML_BUILD_NETWORK OFF)
 include(FetchContent)
 
 #[[------------------------------------------------------------------------------
-// Specify the version of SFML you want to use. You can change this to a different version if needed.
+// FetchContent_Declare command is used to specify the URL of the library's source code. It downloads the specified version (3.1.0) from GitHub and makes it available for your project.
 ------------------------------------------------------------------------------]]
 
 FetchContent_Declare(SFML URL https://github.com/SFML/SFML/archive/refs/tags/3.1.0.zip)
+FetchContent_Declare(json URL https://github.com/nlohmann/json/archive/refs/tags/v3.12.0.zip)
 
 #[[------------------------------------------------------------------------------
 // This command downloads and makes the SFML library available for your project.
 ------------------------------------------------------------------------------]]
  
-FetchContent_MakeAvailable(SFML)
+FetchContent_MakeAvailable(SFML json)
 
 #[[------------------------------------------------------------------------------
 // This command collects all the .cpp source files in the "Source" directory and stores their paths in the SOURCES variable. The CONFIGURE_DEPENDS option ensures that CMake re-evaluates the list of source files if any changes occur in the specified directory.
@@ -76,4 +77,4 @@ target_compile_options(NTLEngine PRIVATE $<IF:$<CXX_COMPILER_ID:MSVC>, /W4, -Wal
 // This line links the SFML libraries (Graphics and Audio) to the "NTLEngine" target. It allows your project to use SFML's graphics and audio functionalities.
 ------------------------------------------------------------------------------]]
 
-target_link_libraries(NTLEngine PRIVATE SFML::Graphics SFML::Audio)
+target_link_libraries(NTLEngine PRIVATE SFML::Graphics SFML::Audio nlohmann_json::nlohmann_json)
