@@ -1,4 +1,5 @@
 {
     "windowTitle":"NTL Engine",
-    "windowSize":[800, 800]
+    "windowSize":[800, 800],
+    "disableSfmlLogs":true
 }

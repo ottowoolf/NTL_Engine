@@ -9,6 +9,8 @@ struct EngineConfig
     sf::Vector2f windowSize;
     std::string windowTitle;
 
+    bool disableSfmlLogs;
+
     EngineConfig();
 };
 
