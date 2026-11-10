@@ -5,6 +5,7 @@
 #include "Managers/SaveManager.h"
 #include "Managers/ClipboardManager.h"
 #include "Managers/ResourceManager.h"
+#include "Managers/AudioManager.h"
 
 struct EngineContext
 {
@@ -13,4 +14,5 @@ struct EngineContext
     SaveManager save;
     ClipboardManager clipboard;
     ResourceManager resource;
+    AudioManager audio;
 };

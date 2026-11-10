@@ -15,6 +15,7 @@ Engine::Engine()
         sf::err().rdbuf(nullptr); // Disable SFML logs if the configuration flag is set
     }
 
+    context_.audio.SetGlobalVolume(gConfig.globalVolume);
     LOG_INFO("Engine initialized and Window created!");
 }
 
