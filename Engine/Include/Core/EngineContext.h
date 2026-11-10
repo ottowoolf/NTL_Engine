@@ -6,6 +6,7 @@
 #include "Managers/ClipboardManager.h"
 #include "Managers/ResourceManager.h"
 #include "Managers/AudioManager.h"
+#include "Managers/InputManager.h"
 
 struct EngineContext
 {
@@ -15,4 +16,5 @@ struct EngineContext
     ClipboardManager clipboard;
     ResourceManager resource;
     AudioManager audio;
+    InputManager input;
 };

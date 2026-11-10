@@ -20,3 +20,13 @@ void EngineVisitor::operator()(const sf::Event::FocusGained &)
 {
     engine.EventFocusGained();
 }
+
+void EngineVisitor::operator()(const sf::Event::JoystickConnected &joystick)
+{
+    engine.EventGamepadConnected(joystick.joystickId);
+}
+
+void EngineVisitor::operator()(const sf::Event::JoystickDisconnected &joystick)
+{
+    engine.EventGamepadDisconnected(joystick.joystickId);
+}

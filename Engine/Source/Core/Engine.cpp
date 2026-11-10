@@ -9,8 +9,9 @@ Engine::Engine()
 
     window_.setIcon(sf::Image("Content/Textures/Logos/NTL_Icon.png"));
     window_.setMinimumSize(window_.getSize() / 2u);
+    window_.setKeyRepeatEnabled(false); // Disable key repeat to avoid multiple key press events for a single press
 
-    if (!gConfig.disableSfmlLogs)
+    if (gConfig.disableSfmlLogs)
     {
         sf::err().rdbuf(nullptr); // Disable SFML logs if the configuration flag is set
     }
@@ -66,4 +67,14 @@ void Engine::EventFocusLost()
 void Engine::EventFocusGained()
 {
     LOG_INFO("Window focus gained.");
+}
+
+void Engine::EventGamepadConnected(int id)
+{
+    LOG_INFO("Gamepad with ID | {} | connected", id);
+}
+
+void Engine::EventGamepadDisconnected(int id)
+{
+    LOG_INFO("Gamepad with ID | {} | disconnected", id);
 }

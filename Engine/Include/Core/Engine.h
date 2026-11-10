@@ -26,4 +26,6 @@ private:
     void EventWindowResized(sf::Vector2u size);
     void EventFocusLost();
     void EventFocusGained();
+    void EventGamepadConnected(int id);
+    void EventGamepadDisconnected(int id);
 };

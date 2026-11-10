@@ -26,7 +26,7 @@ namespace Input
   {
     sf::Keyboard::Scan key;
   };
-  struct MouseButton
+  struct Mouse
   {
     sf::Mouse::Button button;
   };
@@ -42,7 +42,7 @@ namespace Input
     int id = 0;
   };
 
-  using Binding = std::variant<Keyboard, MouseButton, Gamepad, Axis>;
+  using Binding = std::variant<Keyboard, Mouse, Gamepad, Axis>;
 
   std::optional<int> LogicalToHardware(GamepadButton button, int id);
   std::optional<GamepadButton> HardwareToLogical(int button, int id);
