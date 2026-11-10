@@ -33,7 +33,7 @@ void Engine::processEvents()
 
 void Engine::update()
 {
-    // Update game logic here
+    context_.time.Update();
 }
 
 void Engine::render()
@@ -49,6 +49,7 @@ void Engine::EventWindowClosed()
 {
     window_.close();
     LOG_INFO("Window closed. Engine shutting down.");
+    LOG_INFO("Window closed after {:.2f} seconds of runtime.", context_.time.GetElapsedTime());
 }
 
 void Engine::EventWindowResized(sf::Vector2u size)
