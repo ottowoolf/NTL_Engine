@@ -2,6 +2,7 @@
 #include "Core/Engine.h"
 #include "Core/EngineConfig.h"
 #include "Utils/Log.h"
+#include "Core/EngineContext.h"
 
 Engine::Engine()
     : window_(sf::VideoMode(sf::Vector2u(gConfig.windowSize)), gConfig.windowTitle)
@@ -42,7 +43,8 @@ void Engine::render()
 {
     window_.clear(sf::Color(243, 240, 255)); // Clear the window with a light purple color
 
-    // Render game objects here
+    context_.renderer.BeginDrawing();
+    window_.draw(sf::Sprite(context_.renderer.FinishDrawing()));
 
     window_.display();
 }

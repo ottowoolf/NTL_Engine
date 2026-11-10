@@ -7,6 +7,7 @@
 #include "Managers/ResourceManager.h"
 #include "Managers/AudioManager.h"
 #include "Managers/InputManager.h"
+#include "Managers/RenderManager.h"
 
 struct EngineContext
 {
@@ -17,4 +18,5 @@ struct EngineContext
     ResourceManager resource;
     AudioManager audio;
     InputManager input;
+    RenderManager renderer;
 };

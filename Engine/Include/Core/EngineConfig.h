@@ -2,6 +2,7 @@
 
 #include <SFML/System/Vector2.hpp>
 #include <SFML/System/Time.hpp>
+#include <SFML/Graphics/Color.hpp>
 
 #include <string>
 
@@ -12,6 +13,7 @@ struct EngineConfig
     bool disableSfmlLogs;
     sf::Time maximumDeltaTime;
     float globalVolume;
+    sf::Color backgroundColor;
 
     EngineConfig();
 };
