@@ -16,6 +16,15 @@ Engine::Engine()
     }
 
     LOG_INFO("Engine initialized and Window created!");
+
+    context_.save.Set<std::string>("player_name", "Player1");
+    context_.save.Set<int>("high_score", 1560);
+
+    int score = context_.save.Get("high_score", 0);
+    std::string playerName = context_.save.Get("player_name", std::string("Otto"));
+
+    LOG_INFO("High Score: {}", score);
+    LOG_INFO("Player Name: {}", playerName);
 }
 
 bool Engine::IsRunning() const
