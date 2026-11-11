@@ -6,6 +6,7 @@ struct EngineVisitor
 {
     class Engine &engine;
 
+    void operator()(const auto &) {};
     void operator()(const sf::Event::Closed &);
     void operator()(const sf::Event::Resized &);
     void operator()(const sf::Event::FocusLost &);
@@ -13,5 +14,5 @@ struct EngineVisitor
     void operator()(const sf::Event::JoystickConnected &);
     void operator()(const sf::Event::JoystickDisconnected &);
     void operator()(const sf::Event::KeyPressed &);
-    void operator()(const auto &) {};
+    void operator()(const sf::Event::JoystickButtonPressed &);
 };

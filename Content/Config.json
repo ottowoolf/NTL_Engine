@@ -5,7 +5,7 @@
     "maximumDeltaTime":0.03,
     "globalVolume": 100,
     "backgroundColor":[255, 255, 255],
-    "cursorRadius": 5,
+    "cursorRadius": 20,
     "cursorSpeed": 800,
     "cursorColor":[255, 100, 0],
     "joyStickDeadZone": 0.1,

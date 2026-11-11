@@ -29,4 +29,7 @@ private:
     void EventGamepadConnected(int id);
     void EventGamepadDisconnected(int id);
     void EventWindowScreenshot();
+    void EventSceneChange(const std::string &sceneName);
+    void EventSceneRestart();
+    void EventSceneMenuReturn();
 };
