@@ -10,7 +10,8 @@ Engine::Engine()
 
     window_.setIcon(sf::Image("Content/Textures/Logos/NTL_Icon.png"));
     window_.setMinimumSize(window_.getSize() / 2u);
-    window_.setKeyRepeatEnabled(false); // Disable key repeat to avoid multiple key press events for a single press
+    window_.setKeyRepeatEnabled(false);
+    window_.setMouseCursorVisible(false); // Hide the default mouse cursor
 
     if (gConfig.disableSfmlLogs)
     {
@@ -37,6 +38,7 @@ void Engine::processEvents()
 void Engine::update()
 {
     context_.time.Update();
+    context_.cursor.UpdateCursorPosition(context_.time.GetDeltaTime());
 }
 
 void Engine::render()
@@ -45,6 +47,8 @@ void Engine::render()
 
     context_.renderer.BeginDrawing();
     window_.draw(sf::Sprite(context_.renderer.FinishDrawing()));
+
+    context_.cursor.RenderCursor();
 
     window_.display();
 }
