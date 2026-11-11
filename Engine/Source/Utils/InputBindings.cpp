@@ -10,9 +10,9 @@ namespace Mapping
     // const int SonyVID = 0x054C;
     const int MicrosoftVID = 0x045E;
 
-    const auto &GetMapping(int vid)
+    const auto &GetMapping(int id)
     {
-        const int vendorId = sf::Joystick::getIdentification(vid).vendorId;
+        const int vendorId = sf::Joystick::getIdentification(id).vendorId;
         return (vendorId == MicrosoftVID) ? Xbox : Playstation;
     }
 }

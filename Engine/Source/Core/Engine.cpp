@@ -5,7 +5,7 @@
 #include "Core/EngineContext.h"
 
 Engine::Engine()
-    : window_(sf::VideoMode(sf::Vector2u(gConfig.windowSize)), gConfig.windowTitle)
+    : window_(sf::VideoMode(sf::Vector2u(gConfig.windowSize)), gConfig.windowTitle), context_(window_)
 {
 
     window_.setIcon(sf::Image("Content/Textures/Logos/NTL_Icon.png"));
@@ -79,4 +79,9 @@ void Engine::EventGamepadConnected(int id)
 void Engine::EventGamepadDisconnected(int id)
 {
     LOG_INFO("Gamepad with ID | {} | disconnected", id);
+}
+
+void Engine::EventWindowScreenshot()
+{
+    context_.screenshot.TakeScreenshot();
 }
