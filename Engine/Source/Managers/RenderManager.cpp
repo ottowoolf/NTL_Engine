@@ -1,11 +1,21 @@
 #include "Managers/RenderManager.h"
 #include "Core/EngineConfig.h"
+#include "Utils/Verify.h"
+#include "Graphics/FX/FXInverted.h"
+
+#include <utility>
 
 RenderManager::RenderManager() : target_(sf::Vector2u(gConfig.windowSize)), backgroundTexture_("Content/Textures/background.jpg"), background_(gConfig.windowSize)
 {
     target_.setSmooth(true);
     background_.setTexture(&backgroundTexture_);
-    background_.setFillColor(gConfig.backgroundColor); // Set the background color to white
+    background_.setFillColor(gConfig.backgroundColor);
+
+    if (sf::Shader::isAvailable())
+    {
+        VERIFY(effectsTarget_.resize(sf::Vector2u(gConfig.windowSize)));
+        effects_.emplace_back(std::make_unique<FXInverted>());
+    }
 }
 
 void RenderManager::Draw(const sf::Drawable &drawable)
@@ -32,5 +42,16 @@ void RenderManager::BeginDrawing()
 const sf::Texture &RenderManager::FinishDrawing()
 {
     target_.display();
-    return target_.getTexture();
+
+    sf::RenderTexture *input = &target_;
+    sf::RenderTexture *output = &effectsTarget_;
+    for (const auto &effect : effects_)
+    {
+        output->clear();
+        effect->Apply(input->getTexture(), *output);
+        output->display();
+        std::swap(input, output);
+    }
+
+    return input->getTexture();
 }
