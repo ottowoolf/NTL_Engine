@@ -59,7 +59,7 @@ FetchContent_MakeAvailable(SFML json logs tgui enum)
 // This command collects all the .cpp source files in the "Source" directory and stores their paths in the SOURCES variable. The CONFIGURE_DEPENDS option ensures that CMake re-evaluates the list of source files if any changes occur in the specified directory.
 ------------------------------------------------------------------------------]]
 
-file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS Engine/Source/*.cpp) 
+file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS Engine/Source/*.cpp Games/Source/*.cpp) 
 
 #[[------------------------------------------------------------------------------
 // Create an executable target named "NTLEngine" using the source files specified in the SOURCES variable.
@@ -69,7 +69,7 @@ add_executable(NTLEngine ${SOURCES})
 #[[------------------------------------------------------------------------------
 // Add the "Include" directory to the include path for the "NTLEngine" target. This allows the compiler to find header files located in the "Include" directory when compiling the source files.
 ------------------------------------------------------------------------------]]
-target_include_directories(NTLEngine PRIVATE Engine/Include)
+target_include_directories(NTLEngine PRIVATE Engine/Include Games/Include)
 
 #[[------------------------------------------------------------------------------
 // This line specifies that the target "NTLEngine" requires C++20 features. It ensures that the compiler uses the appropriate standard when compiling the source files.
