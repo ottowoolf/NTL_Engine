@@ -18,7 +18,7 @@ sf::SoundBuffer *ResourceManager::FetchSound(const std::string &filename)
 {
     if (!sounds_.contains(filename))
     {
-        if (!sounds_[filename].loadFromFile(filename))
+        if (!sounds_[filename].loadFromFile("Content/Sounds/" + filename))
         {
             LOG_ERROR("Failed to load sound: " + filename);
             return nullptr;
@@ -31,7 +31,7 @@ sf::Font *ResourceManager::FetchFont(const std::string &filename)
 {
     if (!fonts_.contains(filename))
     {
-        if (!fonts_[filename].openFromFile(filename))
+        if (!fonts_[filename].openFromFile("Content/Fonts/" + filename))
         {
             LOG_ERROR("Failed to load font: " + filename);
             return nullptr;

@@ -31,7 +31,6 @@ bool Overlay::IsMenuVisible() const
 void Overlay::InitBackground()
 {
     auto background = tgui::Panel::create();
-    background->setSize("100%", "100%");
     background->getRenderer()->setBackgroundColor(sf::Color(0, 0, 0, 150)); // Semi-transparent black
     overlayGroup_->add(background);
 }
@@ -40,14 +39,12 @@ void Overlay::InitButtons()
 {
     auto layout = tgui::VerticalLayout::create();
     layout->setSize("35%", "65%");
-    layout->setPosition("33%", "20%");
-    layout->setOrigin(0.5f, 0.5f); // Center the layout
+    layout->setPosition("31%", "18%");
 
     for (const auto &[selection, name] : magic_enum::enum_entries<OverlaySelection>())
     {
         auto button = tgui::Button::create(name.data());
         button->setTextSize(24);
-        button->setSize("100%", "20%");
         button->onPress([this, selection]
                         { selectedOption_ = selection; });
         layout->add(button);

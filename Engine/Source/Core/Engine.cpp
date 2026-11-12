@@ -19,6 +19,7 @@ Engine::Engine()
     }
 
     context_.audio.SetGlobalVolume(gConfig.globalVolume);
+    context_.scenes.ChangeScene("Bounce");
     LOG_INFO("Engine initialized and Window created!");
 }
 
@@ -42,7 +43,7 @@ void Engine::ProcessEvents()
 
         if (!overlay_.IsMenuVisible())
         {
-            // currentScene_->OnEvent(*event);
+            currentScene_->OnEvent(*event);
         }
     }
 
@@ -59,7 +60,7 @@ void Engine::Update()
 
     if (!overlay_.IsMenuVisible())
     {
-        // currentScene_->Update();
+        currentScene_->Update();
     }
 }
 
@@ -68,7 +69,9 @@ void Engine::Render()
     window_.clear(sf::Color(243, 240, 255)); // Clear the window with a light purple color
 
     context_.renderer.BeginDrawing();
-    // currentScene_->Render();
+
+    currentScene_->Render();
+
     window_.draw(sf::Sprite(context_.renderer.FinishDrawing()));
 
     context_.gui.Render();
@@ -91,13 +94,13 @@ void Engine::EventWindowResized(sf::Vector2u size)
 
 void Engine::EventFocusLost()
 {
-    // currentScene_->OnPause(true);
+    currentScene_->OnPause(true);
     LOG_INFO("Window focus lost.");
 }
 
 void Engine::EventFocusGained()
 {
-    // currentScene_->OnPause(overlay_.IsMenuVisible());
+    currentScene_->OnPause(overlay_.IsMenuVisible());
 
     LOG_INFO("Window focus gained.");
 }
@@ -119,7 +122,6 @@ void Engine::EventWindowScreenshot()
 
 void Engine::EventSceneChange(const std::string &sceneName)
 {
-    // TODO: Implement the logic to change the scene
     assert(scenes_.contains(sceneName));
     Scene *newScene = scenes_.at(sceneName).get();
 
@@ -164,7 +166,7 @@ void Engine::EventOverlayPauseToggled()
     context_.cursor.SetShowCursor(isOverlayVisible || cursorVisible);
     cursorWasVisible_ = cursorVisible;
 
-    // currentScene_->OnPause(isOverlayVisible);
+    currentScene_->OnPause(isOverlayVisible);
     LOG_INFO(isOverlayVisible ? "Game paused" : "Game resumed");
 }
 
