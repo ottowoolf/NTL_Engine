@@ -5,7 +5,7 @@ sf::Texture *ResourceManager::FetchTexture(const std::string &filename)
 {
     if (!textures_.contains(filename))
     {
-        if (!textures_[filename].loadFromFile(filename))
+        if (!textures_[filename].loadFromFile("Content/Textures/" + filename))
         {
             LOG_ERROR("Failed to load texture: " + filename);
             return nullptr;
