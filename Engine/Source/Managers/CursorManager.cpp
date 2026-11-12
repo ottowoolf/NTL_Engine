@@ -9,6 +9,8 @@ CursorManager::CursorManager(sf::RenderWindow &window)
     : window_(window), cursorShape_(gConfig.cursorRadius), cursorSpeed_(gConfig.cursorSpeed), showCursor_(gConfig.showCursor)
 {
     cursorShape_.setFillColor(gConfig.cursorColor);
+    cursorShape_.setOutlineColor({255, 255, 255, 200}); // Semi-transparent white outline
+    cursorShape_.setOutlineThickness(2.f);
     cursorShape_.setOrigin(cursorShape_.getGeometricCenter());
     cursorShape_.setPosition(gConfig.windowSize / 2.f);
 }

@@ -18,7 +18,7 @@ EngineConfig::EngineConfig()
     backgroundColor = {json["backgroundColor"][0], json["backgroundColor"][1], json["backgroundColor"][2]};
     cursorRadius = json["cursorRadius"];
     cursorSpeed = json["cursorSpeed"];
-    cursorColor = {json["cursorColor"][0], json["cursorColor"][1], json["cursorColor"][2]};
+    cursorColor = {json["cursorColor"][0], json["cursorColor"][1], json["cursorColor"][2], json["cursorColor"][3]};
     joyStickDeadZone = json["joyStickDeadZone"];
     showCursor = json["showCursor"];
 }

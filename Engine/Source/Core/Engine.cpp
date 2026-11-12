@@ -5,7 +5,7 @@
 #include "Core/EngineContext.h"
 
 Engine::Engine()
-    : window_(sf::VideoMode(sf::Vector2u(gConfig.windowSize)), gConfig.windowTitle), context_(window_)
+    : window_(sf::VideoMode(sf::Vector2u(gConfig.windowSize)), gConfig.windowTitle), context_(window_), scenes_(SceneFactory::CreateScenes(context_)), currentScene_(nullptr), overlay_(context_.gui), cursorWasVisible_(true)
 {
 
     window_.setIcon(sf::Image("Content/Textures/Logos/NTL_Icon.png"));
@@ -27,7 +27,7 @@ bool Engine::IsRunning() const
     return window_.isOpen();
 }
 
-void Engine::processEvents()
+void Engine::ProcessEvents()
 {
     if (const auto nextScene = context_.scenes.FetchNextScene())
     {
@@ -39,20 +39,36 @@ void Engine::processEvents()
     {
         event->visit(EngineVisitor{*this});
         context_.gui.ProcessEvent(*event);
+
+        if (!overlay_.IsMenuVisible())
+        {
+            // currentScene_->OnEvent(*event);
+        }
+    }
+
+    if (const auto selection = overlay_.FetchSelection())
+    {
+        EventOverlaySelect(*selection);
     }
 }
 
-void Engine::update()
+void Engine::Update()
 {
     context_.time.Update();
     context_.cursor.UpdateCursorPosition(context_.time.GetDeltaTime());
+
+    if (!overlay_.IsMenuVisible())
+    {
+        // currentScene_->Update();
+    }
 }
 
-void Engine::render()
+void Engine::Render()
 {
     window_.clear(sf::Color(243, 240, 255)); // Clear the window with a light purple color
 
     context_.renderer.BeginDrawing();
+    // currentScene_->Render();
     window_.draw(sf::Sprite(context_.renderer.FinishDrawing()));
 
     context_.gui.Render();
@@ -75,11 +91,14 @@ void Engine::EventWindowResized(sf::Vector2u size)
 
 void Engine::EventFocusLost()
 {
+    // currentScene_->OnPause(true);
     LOG_INFO("Window focus lost.");
 }
 
 void Engine::EventFocusGained()
 {
+    // currentScene_->OnPause(overlay_.IsMenuVisible());
+
     LOG_INFO("Window focus gained.");
 }
 
@@ -100,18 +119,72 @@ void Engine::EventWindowScreenshot()
 
 void Engine::EventSceneChange(const std::string &sceneName)
 {
-    LOG_INFO("Changing scene to: {}", sceneName);
     // TODO: Implement the logic to change the scene
+    assert(scenes_.contains(sceneName));
+    Scene *newScene = scenes_.at(sceneName).get();
+
+    if (currentScene_)
+    {
+        currentScene_->OnCleanup();
+    }
+
+    context_.input.ClearBindings();
+
+    currentScene_ = newScene;
+
+    currentScene_->Start();
+
+    LOG_INFO("Changing scene to: {}", sceneName);
 }
 
 void Engine::EventSceneRestart()
 {
-    LOG_INFO("Restarting current scene:!");
+    overlay_.ShowMenu(false);
     context_.scenes.RestartCurrentScene();
+    LOG_INFO("Restarting current scene:!");
 }
 
 void Engine::EventSceneMenuReturn()
 {
-    LOG_INFO("Returning to the menu.");
+    overlay_.ShowMenu(false);
     context_.scenes.ChangeScene("Menu");
+
+    context_.cursor.SetShowCursor(true);
+    context_.cursor.SetCursorSpeed(gConfig.cursorSpeed);
+
+    LOG_INFO("Returning to the menu.");
+}
+
+void Engine::EventOverlayPauseToggled()
+{
+    const bool isOverlayVisible = !overlay_.IsMenuVisible();
+    overlay_.ShowMenu(isOverlayVisible);
+
+    const bool cursorVisible = context_.cursor.IsCursorVisible();
+    context_.cursor.SetShowCursor(isOverlayVisible || cursorVisible);
+    cursorWasVisible_ = cursorVisible;
+
+    // currentScene_->OnPause(isOverlayVisible);
+    LOG_INFO(isOverlayVisible ? "Game paused" : "Game resumed");
+}
+
+void Engine::EventOverlaySelect(const OverlaySelection &selection)
+{
+    switch (selection)
+    {
+    case OverlaySelection::Resume:
+        EventOverlayPauseToggled();
+        break;
+    case OverlaySelection::Restart:
+        EventSceneRestart();
+        break;
+    case OverlaySelection::Menu:
+        EventSceneMenuReturn();
+        break;
+    case OverlaySelection::Quit:
+        EventWindowClosed();
+        break;
+    default:
+        break;
+    }
 }

@@ -1,13 +1,16 @@
 #include "Managers/GuiManager.h"
 
 #include "Utils/InputBindings.h"
+#include "Utils/Log.h"
+
+#include <filesystem> // temp include
 
 GuiManager::GuiManager(sf::RenderWindow &window)
     : window_(window), gui_(window_)
 {
     tgui::Theme::setDefault("Content/Themes/Black.txt");
-    gui_.setTabKeyUsageEnabled(true);
     gui_.setFont("Content/Fonts/Audiowide.ttf");
+    gui_.setTabKeyUsageEnabled(true);
 }
 
 void GuiManager::ProcessEvent(const sf::Event &event)
@@ -21,12 +24,12 @@ void GuiManager::Render()
     gui_.draw();
 }
 
-void GuiManager::AddWidget(tgui::Widget::Ptr &widget)
+void GuiManager::Add(const tgui::Widget::Ptr &widget)
 {
     gui_.add(widget);
 }
 
-void GuiManager::RemoveWidget(tgui::Widget::Ptr &widget)
+void GuiManager::Remove(const tgui::Widget::Ptr &widget)
 {
     gui_.remove(widget);
 }

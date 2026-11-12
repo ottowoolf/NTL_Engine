@@ -13,8 +13,8 @@ private:
 public:
     GuiManager(sf::RenderWindow &window);
 
-    void AddWidget(tgui::Widget::Ptr &widget);
-    void RemoveWidget(tgui::Widget::Ptr &widget);
+    void Add(const tgui::Widget::Ptr &widget);
+    void Remove(const tgui::Widget::Ptr &widget);
 
 private:
     friend class Engine;

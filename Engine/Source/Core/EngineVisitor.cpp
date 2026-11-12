@@ -45,6 +45,10 @@ void EngineVisitor::operator()(const sf::Event::KeyPressed &key)
     {
         engine.EventSceneMenuReturn();
     }
+    else if (key.scancode == sf::Keyboard::Scan::Escape)
+    {
+        engine.EventOverlayPauseToggled();
+    }
 }
 
 void EngineVisitor::operator()(const sf::Event::JoystickButtonPressed &joystick)
@@ -54,6 +58,10 @@ void EngineVisitor::operator()(const sf::Event::JoystickButtonPressed &joystick)
         if (*button == GamepadButton::Select)
         {
             engine.EventSceneRestart();
+        }
+        else if (*button == GamepadButton::Start)
+        {
+            engine.EventOverlayPauseToggled();
         }
     }
 }

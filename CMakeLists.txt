@@ -47,12 +47,13 @@ FetchContent_Declare(SFML URL https://github.com/SFML/SFML/archive/refs/tags/3.1
 FetchContent_Declare(json URL https://github.com/nlohmann/json/archive/refs/tags/v3.12.0.zip)
 FetchContent_Declare(logs URL https://github.com/gabime/spdlog/archive/refs/tags/v1.17.0.zip)
 FetchContent_Declare(tgui URL https://github.com/texus/TGUI/archive/refs/tags/v1.13.0.zip)
+FetchContent_Declare(enum URL https://github.com/Neargye/magic_enum/archive/refs/tags/v0.9.8.zip)
 
 #[[------------------------------------------------------------------------------
 // This command downloads and makes the SFML library available for your project.
 ------------------------------------------------------------------------------]]
  
-FetchContent_MakeAvailable(SFML json logs tgui)
+FetchContent_MakeAvailable(SFML json logs tgui enum)
 
 #[[------------------------------------------------------------------------------
 // This command collects all the .cpp source files in the "Source" directory and stores their paths in the SOURCES variable. The CONFIGURE_DEPENDS option ensures that CMake re-evaluates the list of source files if any changes occur in the specified directory.
@@ -86,4 +87,5 @@ target_compile_options(NTLEngine PRIVATE $<IF:$<CXX_COMPILER_ID:MSVC>, /W4, -Wal
 // This line links the SFML libraries (Graphics and Audio) to the "NTLEngine" target. It allows your project to use SFML's graphics and audio functionalities.
 ------------------------------------------------------------------------------]]
 
-target_link_libraries(NTLEngine PRIVATE SFML::Graphics SFML::Audio nlohmann_json::nlohmann_json spdlog::spdlog TGUI::TGUI)
+target_link_libraries(NTLEngine PRIVATE SFML::Graphics SFML::Audio nlohmann_json::nlohmann_json spdlog::spdlog TGUI::TGUI 
+    magic_enum::magic_enum)

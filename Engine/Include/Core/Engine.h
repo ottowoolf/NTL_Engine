@@ -3,21 +3,27 @@
 
 #include "Core/EngineVisitor.h"
 #include "Core/EngineContext.h"
+#include "Scene/SceneFactory.h"
+#include "Core/Overlay.h"
 
 class Engine
 {
 private:
     sf::RenderWindow window_;
     EngineContext context_;
+    SceneFactory::Scenes scenes_;
+    Scene *currentScene_;
+    Overlay overlay_;
+    bool cursorWasVisible_;
 
 public:
     Engine();
 
     bool IsRunning() const;
 
-    void processEvents();
-    void update();
-    void render();
+    void ProcessEvents();
+    void Update();
+    void Render();
 
 private:
     friend EngineVisitor;
@@ -32,4 +38,6 @@ private:
     void EventSceneChange(const std::string &sceneName);
     void EventSceneRestart();
     void EventSceneMenuReturn();
+    void EventOverlayPauseToggled();
+    void EventOverlaySelect(const OverlaySelection &selection);
 };

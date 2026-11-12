@@ -7,7 +7,7 @@
     "backgroundColor":[255, 255, 255],
     "cursorRadius": 20,
     "cursorSpeed": 800,
-    "cursorColor":[255, 100, 0],
+    "cursorColor":[255, 255, 255, 50],
     "joyStickDeadZone": 0.1,
     "showCursor": true
 }
