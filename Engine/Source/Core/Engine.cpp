@@ -28,6 +28,11 @@ bool Engine::IsRunning() const
     return window_.isOpen();
 }
 
+bool Engine::HasFocus() const
+{
+    return window_.hasFocus();
+}
+
 void Engine::ProcessEvents()
 {
     if (const auto nextScene = context_.scenes.FetchNextScene())

@@ -2,6 +2,9 @@
 #include "Core/EngineConfig.h"
 #include "Utils/Verify.h"
 #include "Graphics/FX/FXInverted.h"
+#include "Graphics/FX/FXGlitch.h"
+#include "Graphics/FX/FXBloom.h"
+#include "Graphics/FX/FXMonitor.h"
 
 #include <utility>
 
@@ -14,7 +17,10 @@ RenderManager::RenderManager() : target_(sf::Vector2u(gConfig.windowSize)), back
     if (sf::Shader::isAvailable())
     {
         VERIFY(effectsTarget_.resize(sf::Vector2u(gConfig.windowSize)));
-        effects_.emplace_back(std::make_unique<FXInverted>());
+        // effects_.emplace_back(std::make_unique<FXInverted>());
+        // effects_.emplace_back(std::make_unique<FXGlitch>());
+        effects_.emplace_back(std::make_unique<FXBloom>());
+        effects_.emplace_back(std::make_unique<FXMonitor>());
     }
 }
 
