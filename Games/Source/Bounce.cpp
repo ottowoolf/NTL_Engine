@@ -1,4 +1,5 @@
 #include "Bounce.h"
+#include "Managers/RandomManager.h"
 
 using namespace Bounce;
 
@@ -162,7 +163,7 @@ void Game::EventBallSpawn()
     auto &ball = balls.emplace_back();
 
     ball.ballShape.setRadius(BALL_RADIUS);
-    ball.ballShape.setFillColor(BALL_COLOR);
+    ball.ballShape.setFillColor(randomManager.Color(sf::Color::White, sf::Color::Red));
     ball.ballShape.setOrigin(ball.ballShape.getGeometricCenter());
     ball.ballShape.setPosition(gConfig.windowSize.componentWiseMul({0.5f, 0.15f}));
 
@@ -206,6 +207,10 @@ void Game::ResolveCollisionPaddleBall(Ball &ball)
     ball.direction.y *= -1;
     bounceSound.play();
 
+    if (ctx.renderer.GetRipple())
+    {
+        ctx.renderer.GetRipple()->TriggerRipple(ball.ballShape.getPosition(), gConfig.windowSize, randomManager.Color(sf::Color::White, sf::Color::Red));
+    }
     stats.score++;
     stats.scoreText.setString("Score: " + std::to_string(stats.score));
 }

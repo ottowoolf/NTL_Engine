@@ -6,6 +6,8 @@
 
 #include "Graphics/Effect.h"
 
+class FXRipple;
+
 class RenderManager
 {
 private:
@@ -17,6 +19,9 @@ private:
     std::vector<std::unique_ptr<Effect>> effects_;
     sf::RenderTexture effectsTarget_;
 
+    // Pointer to the ripple effect
+    FXRipple *rippleEffect_ = nullptr;
+
 public:
     RenderManager();
 
@@ -24,6 +29,9 @@ public:
 
     void SetView(const sf::View &view);
     void ResetView();
+
+    // Accessor for the ripple effect
+    FXRipple *GetRipple() const { return rippleEffect_; }
 
 private:
     friend class Engine;

@@ -20,7 +20,7 @@ namespace Bounce
     const float BOUNCE_SOUND_VOLUME = 10;
 
     const sf::Color PADDLE_COLOR(sf::Color::Green);
-    const sf::Color BALL_COLOR(sf::Color::Cyan);
+    const sf::Color BALL_COLOR(sf::Color::Yellow);
     const sf::Color STATS_SCORE_TEXT_COLOR(sf::Color::Cyan);
     const sf::Color STATS_HIGH_SCORE_TEXT_COLOR(sf::Color::Yellow);
     const sf::Color STATS_LIVES_TEXT_COLOR(sf::Color::Red);

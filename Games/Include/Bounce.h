@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Types/BounceTypes.h"
+#include "Graphics/FX/FXRipple.h"
+#include "Managers/RandomManager.h"
 
 namespace Bounce
 {
@@ -15,6 +17,8 @@ namespace Bounce
         sf::RectangleShape background;
         sf::Sound bounceSound;
         sf::Music backgroundMusic;
+        FXRipple fxRipple;
+        RandomManager randomManager;
 
     public:
         Game(EngineContext &);
