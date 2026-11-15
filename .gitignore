@@ -90,3 +90,10 @@ vcpkg_installed/
 # ==========================================
 .DS_Store
 Thumbs.db
+bundle.py
+Core_Blueprint.txt
+Games_Blueprint.txt
+Graphics_Blueprint.txt
+Managers_Blueprint.txt
+Scene_Blueprint.txt
+Utils_Blueprint.txt
