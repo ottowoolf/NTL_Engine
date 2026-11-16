@@ -19,9 +19,9 @@ void Game::InitBackground()
 
 void Game::InitTarget()
 {
-    target.shape.setTexture(ctx.resource.FetchTexture(TARGET_TEXTURE_FILENAME));
     target.shape.setRadius(TARGET_RADIUS);
-    target.shape.setPosition(target.shape.getGeometricCenter());
+    target.shape.setTexture(ctx.resource.FetchTexture(TARGET_TEXTURE_FILENAME));
+    target.shape.setOrigin(target.shape.getGeometricCenter());
 
     target.teleportCooldown.SetDuration(TARGET_TELEPORT_COOLDOWN);
 };
@@ -98,7 +98,7 @@ void Game::UpdateTarget()
     if (target.teleportCooldown.IsOver())
     {
         EventTargetTeleport();
-        target.teleportCooldown.Start();
+        target.teleportCooldown.Restart();
     }
 
     UpdateTargetColor();
@@ -107,7 +107,9 @@ void Game::UpdateTarget()
 void Game::UpdateTargetColor()
 {
     float progress = target.teleportCooldown.GetElapsedTime() / target.teleportCooldown.GetDuration();
+
     sf::Color color = target.shape.getFillColor();
+
     color.a = std::uint8_t(255 * (1.0f - std::min(progress, 1.0f)));
     target.shape.setFillColor(color);
 }
@@ -127,7 +129,7 @@ void Game::UpdateStats()
 void Game::EventTargetClicked()
 {
     EventTargetTeleport();
-    target.teleportCooldown.Reset();
+    target.teleportCooldown.Restart();
 
     if (stats.score == 0)
     {
