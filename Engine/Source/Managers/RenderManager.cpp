@@ -32,7 +32,7 @@ RenderManager::RenderManager() : target_(sf::Vector2u(gConfig.windowSize)), back
         effects_.emplace_back(std::make_unique<FXBloom>());
         // effects_.emplace_back(std::make_unique<FXInverted>());
         // effects_.emplace_back(std::make_unique<FXPosterize>());
-        effects_.emplace_back(std::make_unique<FXWaves>());
+        // effects_.emplace_back(std::make_unique<FXWaves>());
         effects_.emplace_back(std::make_unique<FXMonitor>());
         effects_.emplace_back(std::make_unique<FXChromaticAbbr>());
         // effects_.emplace_back(std::make_unique<FXPixelate>());

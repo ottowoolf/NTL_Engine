@@ -19,7 +19,7 @@ Engine::Engine()
     }
 
     context_.audio.SetGlobalVolume(gConfig.globalVolume);
-    context_.scenes.ChangeScene("Bounce");
+    context_.scenes.ChangeScene("Clicker");
     LOG_INFO("Engine initialized and Window created!");
 }
 
